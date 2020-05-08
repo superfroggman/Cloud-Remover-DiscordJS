@@ -48,4 +48,5 @@ client.on('message', msg => {
 
 });
 
-client.login('NzA4NDIwNTk1Mjk3MDI2MTA5.XrXGmg.3QzFE9-Zf7rzjytOxLjbJVpokRY');
+const config = require("./config.json");
+client.login(config.token);
