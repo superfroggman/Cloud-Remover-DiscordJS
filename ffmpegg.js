@@ -10,42 +10,23 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    if(msg.attachments.first() == null){
+    if (msg.attachments.first() == null || msg.author.bot) {
         return;
     }
+
     console.log("attachmentURL:", msg.attachments.first().proxyURL);
 
-    
+
     var input = "http" + msg.attachments.first().proxyURL.substring(5);
 
     console.log("input:", input);
 
-    const file = fs.createWriteStream("file.jpg");
+    const file = fs.createWriteStream("./files/file.mp4");
     const request = http.get(input, function (response) {
         response.pipe(file);
+        msg.channel.send("here's your file back, thanks for letting me borrow it, buddy. sorry, might have broken it a bit", {files: ["./files/file.mp4"]});
     });
-
-
-    /*
-    try {
-        var process = new ffmpeg(input);
-        process.then(function (video) {
-            // Callback mode
-            video.fnAddWatermark('./noNOISE.png', './out.mp4', {
-                position : 'SE'
-            }, function (error, file) {
-                if (!error)
-                    console.log('New video file: ' + file);
-            });
-        }, function (err) {
-            console.log('Error: ' + err);
-        });
-    } catch (e) {
-        console.log(e.code);
-        console.log(e.msg);
-    }
-    */
-
+    
 });
 
 const config = require("./config.json");
