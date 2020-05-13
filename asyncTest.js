@@ -10,6 +10,10 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+    asyncCall(msg)
+});
+
+async function asyncCall(msg) {
     if (msg.attachments.first() == null || msg.author.bot) {
         console.log("No attatchment");
         return;
@@ -17,19 +21,27 @@ client.on('message', msg => {
 
     console.log("attachmentURL:", msg.attachments.first().proxyURL);
 
-
     var input = "http" + msg.attachments.first().proxyURL.substring(5);
 
     console.log("input:", input);
 
-    const file = fs.createWriteStream("./files/file.png");
-    const request = http.get(input, function (response) {
-        response.pipe(file);
-        
-    });
-    msg.channel.send("here's your file back, thanks for letting me borrow it, buddy. sorry, might have broken it a bit", {files: ["./files/file.png"]});
-});
+    await resolveAfter2Seconds(input);
 
+    msg.channel.send("here's your file back, thanks for letting me borrow it, buddy. sorry, might have broken it a bit", { files: ["./files/file.png"] });
+}
+
+function resolveAfter2Seconds(input) {
+    console.log("hej")
+    return new Promise(resolve => {
+        console.log("hej2")
+        const file = fs.createWriteStream("./files/file.png");
+        const request = http.get(input, function (response) {
+            response.pipe(file);
+        });
+
+        resolve("done");
+    });
+}
 
 
 const config = require("./config.json");
