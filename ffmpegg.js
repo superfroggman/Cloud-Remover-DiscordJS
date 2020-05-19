@@ -25,7 +25,6 @@ client.on('message', msg => {
     const file = fs.createWriteStream("./files/file.png");
     const request = http.get(input, function (response) {
         response.pipe(file);
-        
     });
     msg.channel.send("here's your file back, thanks for letting me borrow it, buddy. sorry, might have broken it a bit", {files: ["./files/file.png"]});
 });
