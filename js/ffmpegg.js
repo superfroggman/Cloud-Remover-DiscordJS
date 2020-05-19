@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const ffmpeg = require('ffmpeg');
 const http = require('http');
 const fs = require('fs');
 
@@ -26,10 +25,14 @@ client.on('message', msg => {
     const request = http.get(input, function (response) {
         response.pipe(file);
     });
-    msg.channel.send("here's your file back, thanks for letting me borrow it, buddy. sorry, might have broken it a bit", {files: ["./files/file.png"]});
+
+    setTimeout(function (){
+        msg.channel.send("here's your file back, thanks for letting me borrow it, buddy. sorry, might have broken it a bit", {files: ["./files/file.png"]});
+    }, 2000)
+    
 });
 
 
 
-const config = require("./config.json");
+const config = require("../config.json");
 client.login(config.token);
