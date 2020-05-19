@@ -8,16 +8,6 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    /*
-    console.log("\nnew message");
-    console.log("content:", msg.content);
-    console.log("file:", msg.files);
-    console.log("url:", msg.url);
-    console.log("attachments:", msg.attachments);
-    console.log("attachmentURL:", msg.attachments.first().proxyURL);
-
-    var input = msg.attachments.first().proxyURL;
-    */
     
     if (msg.content === 'ping') {
         msg.reply('Pong!');

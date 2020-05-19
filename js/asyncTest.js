@@ -44,5 +44,5 @@ function resolveAfter2Seconds(input) {
 }
 
 
-const config = require("./config.json");
+const config = require("../config.json");
 client.login(config.token);
